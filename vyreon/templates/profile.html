@@ -1,0 +1,51 @@
+{# vyreon\templates\profile.html #}
+
+{% extends '_base.html' %}
+
+{% block maincontent %}
+<h2>Perfil de {{ user.username }}</h2>
+
+
+<div class="card my-4" style="max-width: 400px; margin: auto;">
+    <div class="card-header"><strong>{{ user.first_name }} {{ user.last_name }}</strong></div>
+    <div class="card-body">
+
+        <ul class="mb-0 px-2 px-md-4">
+            <li><strong>Username:</strong> {{ user.username }}</li>
+            {% if user.first_name != '' %}
+            <li><strong>Nome:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+            {% endif %}
+            <li><strong>E-mail:</strong> {{ user.email }}</li>
+            <li><strong>Cadastro:</strong> {{ user.date_joined|date:"d/m/Y" }}</li>
+            <li><strong>Último login:</strong> {{ user.last_login|date:"d/m/Y H:i" }}</li>
+            {% if user.is_staff %}
+            <li><strong>Status:</strong> administrador</li>
+            {% else %}
+            <li><strong>Status:</strong> usuário regular</li>
+            {% endif %}
+        </ul>
+
+    </div>
+    <div class="card-footer">
+
+        <form method="POST" action="{% url 'logout' %}" class="d-grid gap-3 m-auto py-2">
+            {% csrf_token %}
+            <button type="button" class="btn btn-warning" onclick="location.href='{% url 'edit_profile' %}'">
+                <i class="fa-solid fa-user-pen"></i> Editar Perfil
+            </button>
+            <button class="btn btn-danger" type="submit">
+                <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+
+{% block maincontent %}
+<h2>Olá Mundo!</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock %}
+
+{% block sidecontent %}
+<h2>Mais coisas</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+{% endblock %}

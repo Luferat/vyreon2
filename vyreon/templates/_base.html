@@ -1,0 +1,119 @@
+{# vyreon\templates\_base.html #}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon-nobg.png' %}">
+    <style>
+        body {
+            background-image: url("{% static 'img/bg01.png' %}");
+        }
+    </style>
+    <title>VyreOn</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top">
+        <div class="container">
+            <a class="navbar-brand fs-3 p-0 d-flex align-items-center" href="{% url 'home' %}">
+                <i class="fa-logo fa-solid fa-spider fa-fw fa-rotate-by text-warning me-2"></i>
+                <span>Vyre<span class="text-warning">On</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link ps-2" href="{% url 'home' %}">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                            <span>Início</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle ps-2" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fa-solid fa-circle-info fa-fw"></i>
+                            <span>Sobre</span>
+                        </a>
+                        <ul class="dropdown-menu ms-3">
+                            <li><a class="dropdown-item" href="#"><i
+                                        class="fa-solid fa-comments fa-fw me-1"></i><span>Faça Contato</span></a></li>
+                            <li><a class="dropdown-item" href="#"><i
+                                        class="fa-solid fa-globe fa-fw me-1"></i><span>Sobre o Site</span></a></li>
+                            <li><a class="dropdown-item" href="#"><i
+                                        class="fa-solid fa-user-tie fa-fw me-1"></i><span>Sobre o Autor</span></a></li>
+                            <li><a class="dropdown-item" href="#"><i
+                                        class="fa-solid fa-user-lock fa-fw me-1"></i><span>Políticas de
+                                        Privacidade</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+
+                        {% if user.is_authenticated %}
+
+                        <a class="nav-link ps-2" href="{% url 'profile' %}"><span>{{ user.username }}</span></a>
+
+                        {% else %}
+                        <a class="nav-link ps-2" href="{% url 'login' %}">
+                            <i class="fa-solid fa-arrow-right-to-bracket fa-fw"></i>
+                            <span>Entrar</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
+                <form class="d-flex pt-2 pt-md-0">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Procurar...">
+                        <button class="btn btn-warning" type="button">
+                            <i class="fa-solid fa-magnifying-glass fa-fw fa-flip-horizontal"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="my-3">&nbsp;</div>
+    <main class="container flex-grow-1 d-flex p-0">
+
+
+        <div class="d-flex flex-column flex-md-row gap-md-2 w-100">
+
+            <article class="flex-grow-1 p-3 bg-white">
+                {% block maincontent %}{% endblock %}
+            </article>
+
+
+            {# O conteúdo complementar é opcional, controlado por `bool context['sidecontent']` #}
+            {% if sidecontent %}
+            <aside class="aside-fixed p-3">
+                {% block sidecontent %}{% endblock %}
+            </aside>
+            {% endif %}
+
+        </div>
+    </main>
+
+    <footer class="bg-success text-white">
+        <div class="container d-flex align-items-center justify-content-between p-0">
+            <a href="{% url 'home' %}" class="p-2 f-link"><i class="fa-solid fa-house fa-fw fa-2x"></i></a>
+            <div class="text-center">
+                &copy; 2026 Joca da Silva
+                <small class="d-block">Todos os direitos reservados</small>
+            </div>
+            <a href="#top" class="p-2 f-link"><i class="fa-solid fa-circle-up fa-fw fa-2x"></i></a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+</body>
+
+</html>
