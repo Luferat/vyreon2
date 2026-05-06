@@ -2,9 +2,9 @@
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserChangeForm
-from vyreon.formsmodel import EditProfileForm
-from django.contrib.auth.forms import UserCreationForm
+from vyreon.formsmodel import EditProfileForm, RegisterForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 
 def index(request):
@@ -14,31 +14,51 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+# Ver perfil do usuário logado
 @login_required
 def profile(request):
     context = {
         'sidecontent': True,
     }
-    return render(request, 'profile.html', context)
+    return render(request, 'user/profile.html', context)
 
-
+# Editar perfil do usuário logado
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
+        print(request.POST)
+        form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('profile')
     else:
         form = EditProfileForm(instance=request.user)
-    return render(request, 'edit_profile.html', {'form': form})
+    return render(request, 'user/edit_profile.html', {'form': form})
 
+
+# Cadastro de novo usuário
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('login')
     else:
-        form = UserCreationForm()
-    return render(request, 'register.html', {'form': form})
+        form = RegisterForm()
+    return render(request, 'user/register.html', {'form': form})
+
+
+# Usuário logado altera a senha
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # mantém o usuário logado
+            return redirect('profile')
+        else:
+            print('>>> ERROS:', form.errors)
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'user/change_password.html', {'form': form})

@@ -1,0 +1,33 @@
+{% extends '_base.html' %}
+{% load widget_tweaks %}
+{% block maincontent %}
+<h2>Perfil de {{ user.username }}</h2>
+<p>Altere os dados abaixo, somente o que precisar. Observe que o <code>username</code> não pode ser alterado.</p>
+<div class="card my-4" style="max-width: 500px; margin: auto;">
+    <div class="card-header"><strong>Usuário: {{ user.username }}</strong></div>
+    <div class="card-body">
+        <form method="POST" class="d-grid">
+            {% csrf_token %}
+            <input type="hidden" name="username" value="{{ user.username }}">
+            <div class="mb-3">
+                <label for="id_first_name" class="form-label">Primeiro nome:</label>
+                {% render_field form.first_name class="form-control" placeholder="Primeiro nome" type="text" %}
+            </div>
+            <div class="mb-3">
+                <label for="id_last_name" class="form-label">Último nome:</label>
+                {% render_field form.last_name class="form-control" placeholder="Último nome" type="text" %}
+            </div>
+            <div class="mb-3">
+                <label for="id_email" class="form-label">E-mail:</label>
+                {% render_field form.email class="form-control" placeholder="E-mail" type="email" %}
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+    <div class="card-footer d-grid">
+        <a href="{% url 'profile' %}" class="btn btn-warning">
+            <i class="fa-regular fa-circle-left fa-fw"></i> Voltar para o Perfil
+        </a>
+    </div>
+</div>
+{% endblock %}

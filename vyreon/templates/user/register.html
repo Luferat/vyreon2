@@ -1,0 +1,62 @@
+{% extends '_base.html' %}
+
+{% load widget_tweaks %}
+
+{% block maincontent %}
+
+<h2>Cadastro</h2>
+
+<p>Cadastre-se para ter acesso aos recursos restritos. Todos os capos são obrigatórios.</p>
+
+<div class="card my-4" style="max-width: 500px; margin: auto;">
+
+    <div class="card-header"><strong>Novo usuário</strong></div>
+
+    <div class="card-body">
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Usuário:</label>
+                {% render_field form.username class="form-control" placeholder="Usuário" type="text" %}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_email" class="form-label">E-mail:</label>
+                {% render_field form.email class="form-control" placeholder="E-mail" type="email" %}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_first_name" class="form-label">Primeiro nome:</label>
+                {% render_field form.first_name class="form-control" placeholder="Primeiro nome" type="text" required="true" %}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_last_name" class="form-label">Último nome:</label>
+                {% render_field form.last_name class="form-control" placeholder="Último nome" type="text" required="true" %}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Senha:</label>
+                {% render_field form.password1 class="form-control" placeholder="Senha" type="password" %}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Repita a senha:</label>
+                {% render_field form.password2 class="form-control" placeholder="Repita a senha" type="password" %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
+        <span>Já tem conta? <a href="{% url 'login' %}">Entrar</a></span>
+        <a href="/reset">Lembrar senha</a>
+    </div>
+
+</div>
+
+{% endblock %}

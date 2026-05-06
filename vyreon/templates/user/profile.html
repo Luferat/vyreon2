@@ -30,9 +30,14 @@
 
         <form method="POST" action="{% url 'logout' %}" class="d-grid gap-3 m-auto py-2">
             {% csrf_token %}
-            <button type="button" class="btn btn-warning" onclick="location.href='{% url 'edit_profile' %}'">
-                <i class="fa-solid fa-user-pen"></i> Editar Perfil
-            </button>
+            <a href="{% url 'edit_profile' %}" class="btn btn-warning w-100">
+                <i class="fa-solid fa-user-pen fa-fw"></i> Editar Perfil
+            </a>
+            <a href="{% url 'change_password' %}" class="btn btn-warning w-100">
+                <i class="fa-solid fa-key fa-fw"></i> Alterar senha
+            </a>
+
+            <hr class="m-0">
             <button class="btn btn-danger" type="submit">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>

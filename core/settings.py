@@ -119,4 +119,17 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+
+# Envio de e-mail de reset
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'andre@luferat.net'
+# EMAIL_HOST_PASSWORD = 'tpih yewd rlfu xvef'  # senha de app do Google, não a senha normal
+# DEFAULT_FROM_EMAIL = 'andre@luferat.net'
