@@ -23,6 +23,8 @@ def profile(request):
     return render(request, 'user/profile.html', context)
 
 # Editar perfil do usuário logado
+
+
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
@@ -62,3 +64,11 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'user/change_password.html', {'form': form})
+
+# Remover conta
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        request.user.delete()
+        return redirect('home')
+    return render(request, 'user/delete_account.html')

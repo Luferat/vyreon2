@@ -14,6 +14,7 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('register/', views.register, name='register'),
     path('profile/password/', views.change_password, name='change_password'),
+    path('profile/delete/', views.delete_account, name='delete_account'),
 
     # Fluxo do RESET da senha
     path('reset/', auth_views.PasswordResetView.as_view(template_name='user/password_reset.html'), name='password_reset'),

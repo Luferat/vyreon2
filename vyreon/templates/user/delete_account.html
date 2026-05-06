@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+{% block maincontent %}
+<div class="card my-4 border-danger" style="max-width: 500px; margin: auto;">
+    <div class="card-header text-bg-danger"><strong>Remover conta</strong></div>
+    <div class="card-body">
+        <p>Tem certeza que deseja remover sua conta? Essa ação <strong>não pode ser desfeita</strong>.</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger w-100">Sim, remover minha conta</button>
+        </form>
+    </div>
+    <div class="card-footer d-grid">
+        <a href="{% url 'edit_profile' %}" class="btn btn-warning">
+            <i class="fa-regular fa-circle-left fa-fw"></i> Cancelar
+        </a>
+    </div>
+</div>
+{% endblock %}

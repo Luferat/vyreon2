@@ -1,3 +1,4 @@
+{# vyreon\templates\user\edit_profile.html #}
 {% extends '_base.html' %}
 {% load widget_tweaks %}
 {% block maincontent %}
@@ -22,6 +23,10 @@
                 {% render_field form.email class="form-control" placeholder="E-mail" type="email" %}
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
+            <hr>
+            <a href="{% url 'delete_account' %}" class="btn btn-danger w-100">
+                <i class="fa-solid fa-user-xmark fa-fw"></i> Remover minha conta
+            </a>
         </form>
     </div>
     <div class="card-footer d-grid">
