@@ -23,10 +23,14 @@
                 {% render_field form.email class="form-control" placeholder="E-mail" type="email" %}
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
+
+            {% if not user.is_staff %}
             <hr>
             <a href="{% url 'delete_account' %}" class="btn btn-danger w-100">
                 <i class="fa-solid fa-user-xmark fa-fw"></i> Remover minha conta
             </a>
+            {% endif %}
+
         </form>
     </div>
     <div class="card-footer d-grid">
