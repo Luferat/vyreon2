@@ -131,5 +131,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = 'andre@luferat.net'
-# EMAIL_HOST_PASSWORD = 'tpih yewd rlfu xvef'  # senha de app do Google, não a senha normal
+# EMAIL_HOST_PASSWORD = 'aaaa bbbb cccc dddd'  # Senha de app do Google, não a senha normal
 # DEFAULT_FROM_EMAIL = 'andre@luferat.net'
